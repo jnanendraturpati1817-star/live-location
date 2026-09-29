@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Poultry Market</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: #f5f5f5;
+    }
+
+    header {
+      background: #2e7d32;
+      color: white;
+      padding: 18px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 20px auto;
+      padding: 15px;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px #ccc;
+      margin-bottom: 20px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    button {
+      width: 100%;
+      padding: 13px;
+      background: #2e7d32;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1b5e20;
+    }
+
+    .listing {
+      background: white;
+      padding: 15px;
+      border-radius: 12px;
+      margin-top: 15px;
+      box-shadow: 0 2px 8px #ccc;
+    }
+
+    .listing img {
+      width: 100%;
+      max-height: 250px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .price {
+      color: #e65100;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .actions a {
+      flex: 1;
+      padding: 12px;
+      text-align: center;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+
+    .call {
+      background: #1976d2;
+    }
+
+    .whatsapp {
+      background: #25D366;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>🐔 Poultry Market</h1>
+  <p>Buy & Sell Chickens</p>
+</header>
+
+<div class="container">
+
+  <div class="card">
+    <h2>Sell Your Chicken</h2>
+
+    <input type="text" id="name" placeholder="Chicken name">
+    
+    <input type="number" id="price" placeholder="Price ₹">
+
+    <input type="text" id="location" placeholder="Location">
+
+    <input type="tel" id="phone" placeholder="Phone number">
+
+    <input type="text" id="image" placeholder="Image URL">
+
+    <textarea id="description"
+      placeholder="Chicken details"></textarea>
+
+    <button onclick="addChicken()">
+      ➕ Add Chicken
+    </button>
+  </div>
+
+  <h2>🐔 Available Chickens</h2>
+
+  <div id="list"></div>
+
+</div>
+
+<script>
+
+function addChicken() {
+
+  let name = document.getElementById("name").value;
+  let price = document.getElementById("price").value;
+  let location = document.getElementById("location").value;
+  let phone = document.getElementById("phone").value;
+  let image = document.getElementById("image").value;
+  let description = document.getElementById("description").value;
+
+  if (name === "" || price === "" || location === "") {
+    alert("Please fill Chicken name, Price and Location");
+    return;
+  }
+
+  let listing = document.createElement("div");
+
+  listing.className = "listing";
+
+  listing.innerHTML = `
+
+    ${image ? `<img src="${image}" alt="Chicken">` : ""}
+
+    <h2>${name}</h2>
+
+    <p class="price">₹${price}</p>
+
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Location Demo</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 20px;
+      text-align: center;
+    }
+
+    button {
+      padding: 12px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      margin: 10px;
+    }
+
+    #location {
+      margin-top: 20px;
+      padding: 15px;
+      background: #f2f2f2;
+      border-radius: 8px;
+      text-align: left;
+    }
+
+    #map {
+      width: 100%;
+      height: 350px;
+      margin-top: 20px;
+      border: 0;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>📍 Live Location Demo</h1>
+
+  <p>
+    This educational demo requires the user's permission
+    before accessing location.
+  </p>
+
+  <button onclick="startLocation()">
+    Allow Location
+  </button>
+
+  <button onclick="stopLocation()">
+    Stop Tracking
+  </button>
+
+  <div id="location">
+    Location not started.
+  </div>
+
+  <iframe
+    id="map"
+    src="about:blank">
+  </iframe>
+
+  <script>
+
+    let watchId = null;
+
+    function startLocation() {
+
+      if (!navigator.geolocation) {
+        document.getElementById("location").innerHTML =
+          "Geolocation is not supported by this browser.";
+        return;
+      }
+
+      document.getElementById("location").innerHTML =
+        "Requesting location permission...";
+
+      watchId = navigator.geolocation.watchPosition(
+
+        function(position) {
+
+          const latitude = position.coords.latitude;
+          const longitude = position.coords.longitude;
+          const accuracy = position.coords.accuracy;
+
+          document.getElementById("location").innerHTML = `
+            <strong>Live Location</strong><br><br>
+            Latitude: ${latitude}<br>
+            Longitude: ${longitude}<br>
+            Accuracy: ±${Math.round(accuracy)} meters
+          `;
+
+          // Display location on OpenStreetMap
+          const mapUrl =
+            `https://www.openstreetmap.org/export/embed.html?` +
+            `bbox=${longitude - 0.01}%2C${latitude - 0.01}%2C` +
+            `${longitude + 0.01}%2C${latitude + 0.01}` +
+            `&layer=mapnik&marker=${latitude}%2C${longitude}`;
+
+          document.getElementById("map").src = mapUrl;
+        },
+
+        function(error) {
+
+          let message = "";
+
+          switch (error.code) {
+
+            case error.PERMISSION_DENIED:
+              message = "Location permission was denied.";
+              break;
+
+            case error.POSITION_UNAVAILABLE:
+              message = "Location information is unavailable.";
+              break;
+
+            case error.TIMEOUT:
+              message = "Location request timed out.";
+              break;
+
+            default:
+              message = "Unknown location error.";
+          }
+
+          document.getElementById("location").innerHTML =
+            message;
+        },
+
+        {
+          enableHighAccuracy: true,
+          maximumAge: 5000,
+          timeout: 10000
+        }
+      );
+    }
+
+
+    function stopLocation() {
+
+      if (watchId !== null) {
+
+        navigator.geolocation.clearWatch(watchId);
+
+        watchId = null;
+
+        document.getElementById("location").innerHTML =
+          "Live tracking stopped.";
+      }
+    }
+
+  </script>
+
+</body>
+</html>
